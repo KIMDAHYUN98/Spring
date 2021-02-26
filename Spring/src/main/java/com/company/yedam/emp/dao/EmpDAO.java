@@ -1,27 +1,22 @@
-package com.company.yedam.emp;
+package com.company.yedam.emp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 /*
  * VO : Value Object == EmpDTO, EmpDO, Emp ...
  * DAO : Data Access Object 
  */
+@Component
 public class EmpDAO {
 	// 넘겨줄 값이 너무 많을 때 VO를 사용
 	Connection conn;
 	PreparedStatement psmt;
 	
-	// singletone : static 필드로 만들어 진 후 DAO를 요청할 때마다 new를 쓰지 않고 그대로 불러올 수 있음, 최초 1번 생성
-	private static EmpDAO instance;
-	public static EmpDAO getInstance() {
-		if(instance == null) {
-			instance = new EmpDAO();
-		}
-		return instance;
-	}
 	
 	// 전체 조회 select * from employees
 	public ArrayList<EmpVO> selectList() {
@@ -124,12 +119,15 @@ public class EmpDAO {
 		// 2. statement (실행한 sql 구문)
 		
 		String sql = "INSERT INTO EMPLOYEES "
-						+ " (EMPLOYEE_ID,"
+						+ " (EMPLOYEE_ID, "
 						+ " LAST_NAME,"
 						+ " EMAIL,"
 						+ " HIRE_DATE,"
-						+ " JOB_ID) "
-				  + " VALUES (?, ?, ?, ?, ?)";
+						+ " JOB_ID,"
+						+ " first_name, "
+						+ " department_id,"
+						+ " phone_number) "
+				  + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		
 		// 3. execute (실행)
@@ -139,6 +137,9 @@ public class EmpDAO {
 		psmt.setString(3, vo.getEmail());
 		psmt.setDate(4, vo.getHire_date());
 		psmt.setString(5, vo.getJob_id());
+		psmt.setString(6, vo.getFirst_name());
+		psmt.setString(7, vo.getDepartment_id());
+		psmt.setString(8, vo.getPhone_number());
 		int r = psmt.executeUpdate();
 		System.out.println(r + " 건이 등록됨.");
 		

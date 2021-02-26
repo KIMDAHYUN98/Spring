@@ -1,22 +1,17 @@
-package com.company.yedam.emp;
+package com.company.yedam.emp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DeptDAO {
 	Connection conn;
 	PreparedStatement psmt;
 	
-	//singletone
-	private static DeptDAO instance;
-	public static DeptDAO getInstance() {
-		if(instance == null) {
-			instance = new DeptDAO();
-		}
-		return instance;
-	}
 	
 	// 전체 조회
 	public ArrayList<DeptVO> selectList() {

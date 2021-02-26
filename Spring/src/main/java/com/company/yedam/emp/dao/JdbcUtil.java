@@ -1,4 +1,4 @@
-package com.company.yedam.emp;
+package com.company.yedam.emp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

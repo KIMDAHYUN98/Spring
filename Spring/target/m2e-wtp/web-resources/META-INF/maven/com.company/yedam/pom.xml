@@ -10,9 +10,10 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.2.4.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.4</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.slf4j-version>1.7.5</org.slf4j-version>
+		<org.log4j-version>2.9.0</org.log4j-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -28,9 +29,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 
@@ -44,44 +51,25 @@
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${org.log4j-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${org.log4j-version}</version>
 			<exclusions>
+				<!-- Exclude Commons Logging in favor of log4j-core -->
 				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-api</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!-- @Inject -->
@@ -114,7 +102,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

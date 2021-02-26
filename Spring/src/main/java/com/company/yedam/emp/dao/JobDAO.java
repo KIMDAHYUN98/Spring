@@ -1,21 +1,15 @@
-package com.company.yedam.emp;
+package com.company.yedam.emp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+@Component
 public class JobDAO {
 	Connection conn;
 	PreparedStatement psmt;
-	
-	private static JobDAO instance;
-	public static JobDAO getInstance() {
-		if(instance == null) {
-			instance = new JobDAO();
-		}
-		return instance;
-	}
 	
 	public ArrayList<JobVO> selectList() {
 		ArrayList<JobVO> list = new ArrayList<JobVO>();
