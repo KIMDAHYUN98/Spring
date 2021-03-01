@@ -108,8 +108,6 @@ public class EmpDAO {
 		return vo;
 	}
 	
-	// 전체 조회
-	
 	public void insert(EmpVO vo) {
 		
 		try {
@@ -126,7 +124,8 @@ public class EmpDAO {
 						+ " JOB_ID,"
 						+ " first_name, "
 						+ " department_id,"
-						+ " phone_number) "
+						+ " phone_number"
+						+ " manager_id) "
 				  + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		
@@ -140,6 +139,7 @@ public class EmpDAO {
 		psmt.setString(6, vo.getFirst_name());
 		psmt.setString(7, vo.getDepartment_id());
 		psmt.setString(8, vo.getPhone_number());
+		psmt.setString(9, vo.getManager_id());
 		int r = psmt.executeUpdate();
 		System.out.println(r + " 건이 등록됨.");
 		
@@ -157,20 +157,38 @@ public class EmpDAO {
 	public void update(EmpVO vo) {
 		
 		try {
-		
-		// 1. connect (연결)
-			JdbcUtil.connect();
-		// 2. statement (실행한 sql 구문)
-		
-		// 3. execute (실행)
-		
-		// 4. resultSet(select 라면 조회 결과 처리, 없으면 스킵)
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-		// 5. close (연결해제)
-			JdbcUtil.disconnect(conn);
-		} // 공통으로 쓰는 부분은 메소드로 생성(connect, close)
+			conn = JdbcUtil.connect();
+			String sql = "update employees "
+					+ "set FIRST_NAME = ?, "
+					+ "    last_name = ?, "
+					+ "    email = ?, "
+					+ "    phone_number = ?, "
+					+ "    hire_date = ?, "
+					+ "    job_id = ?, "
+					+ "    manager_id = ?,  "
+					+ "    department_id = ? "
+					+ "where employee_id = ?";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, vo.getFirst_name());
+			psmt.setString(2, vo.getLast_name());
+			psmt.setString(3, vo.getEmail());
+			psmt.setString(4, vo.getPhone_number());
+			psmt.setDate(5, vo.getHire_date());
+			psmt.setString(6, vo.getJob_id());
+			psmt.setString(7, vo.getManager_id());
+			psmt.setString(8, vo.getDepartment_id());
+			psmt.setString(9, vo.getEmployee_id());
+			
+			int r = psmt.executeUpdate();
+			System.out.println(r + " 건이 등록됨.");
+			
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+			
+				JdbcUtil.disconnect(conn);
+			}
 	}
 	
 	//이메일 단건 조회

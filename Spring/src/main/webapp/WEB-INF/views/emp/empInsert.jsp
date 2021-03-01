@@ -17,16 +17,7 @@ $(function(){
 			data : "email=" + ﻿$("[name=email]").val(), // 서버에 보낼 파라미터
 			dataType : "xml", 						   // 결과 타입
 			success: function(response) {
-				//span 태그에 출력
-				/* json
-				if(response.email == true) {
-				$('#emailResult').html("<font color='blue'>사용가능></font>");						
-				} else {
-				$('#emailResult').html("<font color='blue'>사용불가능></font>");
-				}*/
 				
-				// xml (= html 태그 찾는 법과 동일)
-				// 태그안에 있는 값을 읽어오는데..
 				$('#emailResult').html($(response).find("email").text()) // jquery 함수
 			},
 		})
@@ -53,7 +44,10 @@ $(function(){
 	job_id
 	<select name="job_id">
 	<c:forEach items="${jobList }" var="job" >
-		<option value="${job.job_id}" selected="selected" }> ${job.job_title }</option>
+		<option value="${job.job_id}"> ${job.job_title }</option>
+		<c:if test="${job.job_id == empVO.job_id }">
+			<option value="${job.job_id}" selected="selected" > ${job.job_title }</option>
+		</c:if>
 	</c:forEach>
 	</select><br>
 	department_id<br>
