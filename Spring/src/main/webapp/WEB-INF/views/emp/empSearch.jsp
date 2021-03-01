@@ -10,7 +10,7 @@
 <script>
 	$(function() {
 		$('.btnSelect').on("click", function() {
-			var empid = $('div').find('span#empId').html()
+			var empid = $(this).attr('empId');
 			var firstName = document.getElementsByTagName("span")[1].innerHTML;
 			opener.document.frm.manager_id.value = empid;
 			$(opener.document).find('[name=manager_id]').val(empid);
