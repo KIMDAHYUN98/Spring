@@ -10,9 +10,10 @@
 <script>
 	$(function() {
 		$('.btnSelect').on("click", function() {
-			var empid = $(this).attr('empId');
-			var firstName = document.getElementsByTagName("span")[1].innerHTML;
+			var empid = $(this).closest(".row").find("span").eq(0).html();
+			var firstName = $(this).closest(".row").find("span").eq(1).html();
 			opener.document.frm.manager_id.value = empid;
+			opener.document.frm.Mname.value = firstName;
 			$(opener.document).find('[name=manager_id]').val(empid);
 			window.close();
 		})
@@ -23,7 +24,7 @@
 <h3>사원 검색</h3>
 	<c:forEach items="${list }" var="emp">
 		<div class="row">
-			<span id="empId">${emp.employee_id }</span>
+			<span>${emp.employee_id }</span>
 			<span>${emp.first_name }</span>
 			<span>${emp.last_name }</span>
 			<span>${emp.hire_date }</span>

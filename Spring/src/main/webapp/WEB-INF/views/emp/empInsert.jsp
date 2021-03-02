@@ -58,7 +58,7 @@ $(function(){
 	</c:forEach><br>
 	manager_id 
 	<input type="text" name="manager_id">
-	<input type="text" name="name">
+	<input type="text" name="Mname">
 	<button type="button" onclick="window.open('empSearch', 'emp', 'width=400, height=400')">사원검색</button><br>	
 
 	<button type="submit">등록</button>

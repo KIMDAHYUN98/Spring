@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /*
  * VO : Value Object == EmpDTO, EmpDO, Emp ...
  * DAO : Data Access Object 
  */
-@Component
+@Repository // @Component 상속
 public class EmpDAO {
 	// 넘겨줄 값이 너무 많을 때 VO를 사용
 	Connection conn;
